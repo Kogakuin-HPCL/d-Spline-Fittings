@@ -1,11 +1,11 @@
 #ライブラリを使用する際に使用するMakefile
 
-USER = user.c #ユーザが使用するmain.cの名前を右辺に入力する。
+ROOT=$(shell pwd -P)
 
 CC=gcc
 
 INC=./dspline/src
-CFLAGS= -O3 -lm -fopenmp -g
+CFLAGS= -shared -O3 -lm -g
 
 OBJDIR=./dspline/work
 LIBDIR=./dspline/lib
@@ -14,15 +14,18 @@ TOOL_DIR=./dspline/tool
 
 OBJ=dsp_qr.o dsp_abic.o dsp_set.o dsp_ind.o idou.o dspline_fitting.o
 
-all: ${LIBDIR}/libdspline.a
-	rm -f abic
-	gcc ${USER} -g -O0  -fopenmp -L ./dspline/lib -I./dspline/include -o fitting  -ldspline -lm
+all: ${LIBDIR}/libdspline.so
+	echo "#!/bin/sh\\n" > setup_env.sh
+	echo "export PATH=\$$PATH:$(ROOT)/dspline/bin" >> setup_env.sh
+	echo "export C_INCLUDE_PATH=\$$C_INCLUDE_PATH:$(ROOT)/dspline/include" >> setup_env.sh
+	echo "export LIBRARY_PATH=\$$LIBRARY_PATH:$(ROOT)/dspline/lib" >> setup_env.sh
+	echo "export LD_LIBRARY_PATH=\$$LD_LIBRARY_PATH:$(ROOT)/dspline/lib" >> setup_env.sh
 
-${LIBDIR}/libdspline.a: $(addprefix ./dspline/work/, ${OBJ})
-	ar rcs $@ $^
+${LIBDIR}/libdspline.so: $(addprefix ./dspline/work/, ${OBJ})
+	${CC} -o $@ $^ ${CFLAGS}
 
 ${OBJDIR}/%.o: ${SRC_DIR}/%.c
-	${CC} ${CFLAGS} -c -o $@ $^ -I${INC}
+	${CC} -c -o $@ $^ -I${INC} ${CFLAGS}
 
 clean:
 	rm -f ${LIBDIR}/*.a

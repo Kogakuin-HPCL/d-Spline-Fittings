@@ -13,8 +13,8 @@ TOOL_DIR=./tool
 OBJ=dsp_qr.o dsp_abic.o dsp_set.o dsp_ind.o idou.o dspline_fitting.o
 
 all: ${LIBDIR}/libdspline.a
-	rm -f abic
 	gcc ${TOOL_DIR}/main.c -g -O0  -fopenmp -L ./lib -I./include -o ./bin/fitting  -ldspline -lm
+	rm -f ${LIBDIR}/libdspline.a
 
 ${LIBDIR}/libdspline.a: $(addprefix ./work/, ${OBJ})
 	ar rcs $@ $^
