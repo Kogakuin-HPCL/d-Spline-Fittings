@@ -20,6 +20,7 @@ all: ${LIBDIR}/libdspline.so
 	echo "export C_INCLUDE_PATH=\$$C_INCLUDE_PATH:$(ROOT)/dspline/include" >> setup_env.sh
 	echo "export LIBRARY_PATH=\$$LIBRARY_PATH:$(ROOT)/dspline/lib" >> setup_env.sh
 	echo "export LD_LIBRARY_PATH=\$$LD_LIBRARY_PATH:$(ROOT)/dspline/lib" >> setup_env.sh
+	make -C ./dspline/
 
 ${LIBDIR}/libdspline.so: $(addprefix ./dspline/work/, ${OBJ})
 	${CC} -o $@ $^ ${CFLAGS}

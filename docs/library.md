@@ -2,23 +2,10 @@
 
 ライブラリとして使用する際の方法を記載する。
 
-- [ファイル生成](#ファイル生成)
 - [入力](#入力)
 - [出力](#出力)
 - [使用方法](#使用方法)
 - [出力例](#出力例)
-
-## ファイル生成
-
-Makefileを使用して`make`コマンドを実行するだけで必要なファイルが生成される．
-
-## 環境変数への追加
-
-自動生成される `setup_env.sh` を使うと，ライブラリ使用に必要な環境変数設定が行われる．
-
-``` bash
-source setup_env.sh
-```
 
 ## 入力
 
@@ -126,8 +113,8 @@ int main() {
 
 `result.png（option1)`
 
-![alt text](result.png)
+![alt text](result_option1.png)
 
 `result.png (option2)`
 
-![alt text](<result copy.png>)
+![alt text](result_option2.png)
