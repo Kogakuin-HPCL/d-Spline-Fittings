@@ -71,7 +71,7 @@ The result graph image
 
 ## Usage
 
-The format of comannd is following:
+The format of command is following:
 
 ```bash
 fitting <input file> <options>
