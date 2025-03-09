@@ -1,32 +1,41 @@
-# 変更履歴
+# Release Note
+
+[English](CHANGELOG.md) | [日本語](CHANGELOG-ja.md)
+
+## Version 0.1.2+docs (2025-03-09)
+
+- Other Updates
+  - Added the English version of the README
+- Known Issues
+  - Using the two-phase model, there are some cases that the utilities output results that seems a bit off to the human eye (2025-03-09: under investigation)
 
 ## Version 0.1.2 (2025-03-07)
 
-- 改善
-  - ルートディレクトリでの `make` のみでビルドが完結するように改善
-  - ツール使用時のオプションを省略可能に仕様変更
-- バグ修正
-  - ツール使用時，x配列とy配列を別々のファイルとして渡す場合，必要なオプションが異なるバグを修正
-- その他の更新
-  - ツール使用時に表示される内容を英語に統一
-  - `datafile` ディレクトリの削除
-- 既知の問題
-  - 二相問題用のモデル適用時，人間にとって違和感のある結果となる場合があり，詳細調査中 (2025-03-09)
+- Improvements
+  - Improved builds to be completed only with `make` in the root directory
+  - Changed specification so that options can be omitted when using the tool
+- Bug Fixes
+  - Fixed a bug that required wrong options when passing x and y arrays as separate files when using the tool
+- Other Updates
+  - Unified the text displayed when using the tool in English
+  - Removed the `datafile` directory
+- Known Issues
+  - Using the two-phase model, there are some cases that the utilities output results that seems a bit off to the human eye (2025-03-09: under investigation)
 
 ## Version 0.1.1 (2025-03-05)
 
-- 改善
-  - 本ライブラリディレクトリ外のユーザプログラムをコンパイル可能に仕様変更
-  - 生成されるライブラリの種類を共有ライブラリにし、ライブラリ使用時に必要だった `-lm` オプションが不要なように変更
-  - 生成されたライブラリへのパスを環境変数に追加するスクリプトを自動生成する仕様を追加
-- バグ修正
-  - ライブラリ生成に必要なディレクトリ `lib` が Git リポジトリに登録されていない問題の修正
+- Improvements
+  - Changed specification to allow compilation of user programs outside this library directory
+  - Changed the type of generated libraries to shared libraries, so that the `-lm` option, which was required when using libraries, is no longer necessary
+  - Added specification to automatically generate a script that adds the path to the generated libraries to the environment variables
+- Bug Fixes
+  - Fixed a problem that the directory `lib` needed for library generation was not registered in the Git repository
 
 ## Version 0.1.0+changelog (2025-02-27)
 
-- その他
-  - 変更履歴を追加
+- Others
+  - Added the Release Note (in Japanese only)
 
 ## Version 0.1.0 (2025-02-25)
 
-初期リリース
+Initial release.

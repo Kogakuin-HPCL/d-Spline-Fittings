@@ -1,64 +1,62 @@
-# d-Spline データあてはめ（データフィッティング）
+# Data Fitting Utilities with d-Spline
 
-入力されたデータを最適ななめらかさで補完されたデータを出力してグラフ化するライブラリおよびツールである。
+[English](README.md) | [日本語](README-ja.md)
 
-READMEは順次更新する予定である
+These utilities fit the input data appropriately using the d-Spline function.  
+These utilities are a pair of libraries and tools.
 
-- [準備](#準備)
-- [ファイル構成](#ファイル構成)
-- [データのあてはめの詳細](#データのあてはめの詳細)
-- [ツールとしての使用方法](docs/tool.md)
-- [ライブラリとしての使用方法](docs/library.md)
+README will be updated as appropriate.
 
-## 準備
+## Preparing
 
-### ファイル生成
+### Creating Files
 
-ルートディレクトリのMakefileを使用して`make`コマンドを実行するだけで必要なファイルが生成される．
+Run the `make` command in the root directory.  
+The necessary files will be created automatically.
 
-### 環境変数への追加
+``` bash
+make
+```
 
-自動生成される `setup_env.sh` を使うと，ライブラリ使用に必要な環境変数設定が行われる．
+### Setting Environment Variable
+
+Add the necessary path to your PATH environment variable.  
+You can set them automatically using setup_env.sh, which is created automatically in the "Creating Files" section.
 
 ``` bash
 source setup_env.sh
 ```
 
-## ファイル構成
+## File structure
 
 - dspline
   - bin  
-  実行ファイル
+  Executable files
   - include  
-  main.cに入力するインクルードファイル
+  Header files for C codes
   - lib  
-  静的ライブラリ
+  Shared library files
   - src  
-  コンパイルに必要なファイル群
+  Source files for building the libraries
   - tool  
-  ツール用のmain.c(基本的にいじらない)
+  The C code `main.c` for building the tools (DO NOT CHANGE)
   - work  
-  オブジェクトファイル群
+  Working directory for building
   - Makefile  
-  ツールで使用する際のMakefile
+  `Makefile` for building the tools (called automatically)
 
-## データのあてはめの詳細  
+## What is "Data fitting"
 
-実験データには一般に誤差が含まれている。その誤差を分離し、データ本来の構造を取り出すためにデータのあてはめを行う。
+Experimental data generally contain measurement errors.  
+Data fitting separates measurement errors from the input data and retrieves the original function structure.
 
-## 最新の変更
+## Latest Release
 
-過去の更新については[変更履歴](CHANGELOG.md)を参照。
+Refer to the [Release Note](CHANGELOG.md) for past updates.
 
-### Version 0.1.2 (2025-03-07)
+### Version 0.1.2+docs (2025-03-09)
 
-- 改善
-  - ルートディレクトリでの `make` のみでビルドが完結するように改善
-  - ツール使用時のオプションを省略可能に仕様変更
-- バグ修正
-  - ツール使用時，x配列とy配列を別々のファイルとして渡す場合，必要なオプションが異なるバグを修正
-- その他の更新
-  - ツール使用時に表示される内容を英語に統一
-  - `datafile` ディレクトリの削除
-- 既知の問題
-  - 二相問題用のモデル適用時，人間にとって違和感のある結果となる場合があり，詳細調査中 (2025-03-09)
+- Other Updates
+  - Added the English version of the README
+- Known Issues
+  - Using the two-phase model, there are some cases that the utilities output results that seems a bit off to the human eye (2025-03-09: under investigation)
