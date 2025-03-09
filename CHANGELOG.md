@@ -2,6 +2,13 @@
 
 [English](CHANGELOG.md) | [日本語](CHANGELOG-ja.md)
 
+## Version 0.1.2+docs2 (2025-03-10)
+
+- Other Updates
+  - Updated the README
+- Known Issues
+  - Using the two-phase model, there are some cases that the utilities output results that seems a bit off to the human eye (2025-03-09: under investigation)
+
 ## Version 0.1.2+docs (2025-03-09)
 
 - Other Updates

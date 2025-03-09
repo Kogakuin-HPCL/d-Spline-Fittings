@@ -1,102 +1,105 @@
-# ツールとしての使用方法
+# How to use the tools
 
-ツールとして使用する際の方法を記載する。
+[English](tool.md) | [日本語](tool-ja.md)
 
-- [入力](#入力)
-- [出力](#出力)
-- [使用方法](#使用方法)
-- [出力例](#出力例)
+- [Input](#input)
+- [Output](#output)
+- [Usage](#usage)
+- [Example](#example)
 
-## 入力
+## Input
 
-以下の2パターンの形式どちらかでデータファイルを用意する．
+Prepare data files in either of the following two formats.
 
-- x配列とy配列を2つのファイルに分けている例  
+- One File (x and y are described side by side)
+- Two Files (x and y are described in different files)
 
-`x配列`
-
-``` txt
-0
-0.25
-0.5
-1
-~中略~
-8.75
-9.0
-9.5
-10
-```
-
-`y配列`
-
-``` txt
-1.62
-1.81
-2.12
-2.32
-~中略~
-4.54
-5.78
-6.52
-7.91
-```
-
-- x配列とy配列を1つのファイルにしている例
+### Example of the One File format
 
 ```txt
 0,1.864202886
 0.25,1.603404302
 0.75,2.188388163
 1,2.264341162
-~中略~
+(omitted)
 9.25,4.170648488
 9.5,5.664498381
 9.75,6.677234607
 10,7.885698628
 ```
 
-配列同士の間はカンマや空白どちらでも可。
+Note: You can use either a comma or a space as a delimiter.
 
-## 出力
+### Example of the Two Files format
 
-- `default.csv`  
-データあてはめ前のcsvファイル
-- `fitting.csv`  
-データあてはめ後のcsvファイル
-- `result.png`  
-gnuplotを用いたデータあてはめ後のグラフ
+`Data x`
 
-## 使用方法
-
-以下のコマンドを入力して出力を行う．  
-
-```bash
-fitting データファイルパス オプション
+``` txt
+0
+0.25
+0.5
+1
+(omitted)
+8.75
+9.0
+9.5
+10
 ```
 
-「データファイルパス」にはデータあてはめを行うデータファイル名を入力する．  
-x配列とy配列を1つのファイルにしている場合は，そのファイルを指定する．
+`Data y`
+
+``` txt
+1.62
+1.81
+2.12
+2.32
+(omitted)
+4.54
+5.78
+6.52
+7.91
+```
+
+## Output
+
+- `default.csv`  
+A CSV file of the input (**before** fitting) data
+- `fitting.csv`  
+A CSV file of the output (**after** fitting) data
+- `result.png`  
+The result graph image
+
+## Usage
+
+The format of comannd is following:
+
+```bash
+fitting <input file> <options>
+```
+
+`<input file>` is the path to the input file (or files).
+
+The example of the One File format:
 
 ``` bash
 fitting data.csv
 ```
 
-x配列とy配列が別々の場合は，`x y` の順番に指定する．
+In the case of the Two Files format, specify in the order `x y`.  
+The example of the Two Files format:
 
 ``` bash
 fitting x.csv y.csv
 ```
 
-オプションには以下の表を参考に入力を行う．
+Options specify the fitting model:
 
-| オプション名 | 内容 |
+| Option | Fitting Model |
 |-|-|
-|`option1`|不等間隔データに対するモデル (デフォルト設定のため省略可)|
-|`option2`|二相問題に対するモデル|
+|`option1`|For normal data (default, so you can omit)|
+|`option2`|For two-phase problem data|
 
-## 出力例
-
-以下のデータファイルでそれぞれの出力例を示す
+## Example
 
 `sample.csv`
 
@@ -105,7 +108,7 @@ fitting x.csv y.csv
 0.25,1.603404302
 0.75,2.188388163
 1,2.264341162
-～中略～
+(omitted)
 9.25,4.170648488
 9.5,5.664498381
 9.75,6.677234607
@@ -119,7 +122,7 @@ fitting x.csv y.csv
 0.250000 1.603404
 0.750000 2.188388
 1.000000 2.264341
-～中略～
+(omitted)
 9.250000 4.170648
 9.500000 5.664498
 9.750000 6.677235
@@ -133,17 +136,17 @@ fitting x.csv y.csv
 0.083333 1.755539
 0.166667 1.757635
 0.250000 1.778883
-～中略～
+(omitted)
 9.750000 6.855400
 9.833333 7.194727
 9.916667 7.454149
 10.000000 7.600462
 ```
 
-`result.png（option1)`
+`result.png（in case of option1)`
 
 ![alt text](result_option1.png)
 
-`result.png (option2)`
+`result.png (in case of option2)`
 
 ![alt text](result_option2.png)

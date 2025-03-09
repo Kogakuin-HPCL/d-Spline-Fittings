@@ -1,50 +1,50 @@
-# ライブラリとしての使用方法
+# How to use the libraries
 
-ライブラリとして使用する際の方法を記載する。
+[English](library.md) | [日本語](library-ja.md)
 
-- [入力](#入力)
-- [出力](#出力)
-- [使用方法](#使用方法)
-- [出力例](#出力例)
+- [Input](#input)
+- [Output](#output)
+- [Usage](#usage)
+- [Example](#example)
 
-## 入力
+## Input
 
-### 関数
+### Callable Function
 
-本ライブラリで使用する関数は以下の通りである。
+The function call in this library is following:
 
 ```c
 ddspline(x,y,n,flag)
 ```
 
-### 引数
+### Arguments
 
-- 第一引数 `x`  
-離散点のx配列である。
-- 第二引数 `y`  
-離散点のy配列である。
-- 第三引数 `n`  
-離散点の数である。
-- 第四引数 `flag`  
-`flag`引数には0及び1が割り当てられている。それぞれモデルの選択を意味しており、以下の表のように0には不等間隔データに対するモデルであり、1には二相問題に対するモデルである。
+- 1st argument `x`  
+The array of x of the experimental data
+- 2nd argument `y`  
+The array of y of the experimental data
+- 3rd argument `n`  
+The number of elements in the input array (`x` and `y`)
+- 4th argument `flag`  
+The type of fitting model. The options are following:
 
-| オプション名 | 内容 |  
+| Option | Fitting Model |  
 |:-:|-|  
-|`0`|不等間隔データに対するモデル|  
-|`1`|二相問題に対するモデル|
+|`0`|For normal data|  
+|`1`|For two-phase problem data|
 
-## 出力
+## Output
 
 - `default.csv`  
-データあてはめ前のcsvファイル
+A CSV file of the input (**before** fitting) data
 - `fitting.csv`  
-データあてはめ後のcsvファイル
+A CSV file of the output (**after** fitting) data
 - `result.png`  
-gnuplotを用いたデータあてはめ後のグラフ
+The result graph image
 
-## 使用方法
+## Usage
 
-1. ユーザのメインプログラムの頭に本ライブラリである`dspline_fitting.h`を以下のように書く．
+1. Include the header `dspline_fitting.h` to your code
 
     `main.c`
 
@@ -53,12 +53,12 @@ gnuplotを用いたデータあてはめ後のグラフ
     #include <stdlib.h>
     ///////
 
-    #include "dspline_fitting.h"    //この部分を追加する
+    #include "dspline_fitting.h"    // Add
 
     ///////
     ```
 
-2. あてはめを行う部分にddspline関数を記述する。記載例は以下の通りである。
+2. Call function `ddspline`
 
     `main.c`
 
@@ -66,22 +66,20 @@ gnuplotを用いたデータあてはめ後のグラフ
 
     /////
 
-    ddspline(x,y,n,flag);   
+    ddspline(x,y,n,flag);   // add
 
     /////
     ```
 
-    `ddspline`関数の入力方法については[入力](#入力)を参照．
+    Refer to the [Input](#input) for usage of `ddspline`
 
-3. `-ldspline` オプションをつけてコンパイルする
+3. Compile your code with the option `-ldspline`
 
     ``` bash
     gcc main.c -ldspline
     ```
 
-## 出力例
-
-以下のプログラムでそれぞれの出力例を示す  
+## Example
 
 `user.c`
 
@@ -98,7 +96,7 @@ int main() {
 
     dspline *result = ddspline(x, y, n, 0);
 
-    printf("補間後のデータ:\n");
+    printf("Data after fitting:\n");
     for (int i = 0; i < result->nn; i++) {
         printf("fx[%d] = %lf, fy[%d] = %lf\n", i, result->fx[i], i, result->fy[i]);
     }
